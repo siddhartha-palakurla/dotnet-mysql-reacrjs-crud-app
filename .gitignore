@@ -1,0 +1,21 @@
+# React
+react-crud-app/node_modules/
+
+# React build
+react-crud-app/build/
+react-crud-app/dist/
+
+# .NET
+dotnet-6-mysql-crud-application/bin/
+dotnet-6-mysql-crud-application/obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Logs
+*.log
+
+# Environment files
+.env
