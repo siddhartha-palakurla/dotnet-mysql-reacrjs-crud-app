@@ -38,7 +38,7 @@ public class UsersController : ControllerBase
     public IActionResult Create(CreateRequest model)
     {
         _userService.Create(model);
-        return Ok(new { message = "User created" });
+        return Ok(new { message = "User created Successfully" });
     }
 
     [HttpPut("{id}")]
