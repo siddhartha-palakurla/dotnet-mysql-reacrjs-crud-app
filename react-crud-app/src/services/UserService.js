@@ -24,5 +24,6 @@ class UserService {
         return axios.delete(USER_API_BASE_URL + '/' + userId);
     }
 }
+const userService = new UserService();
 
-export default new UserService()
+export default userService();
