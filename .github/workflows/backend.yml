@@ -1,0 +1,29 @@
+name: Deploy .NET Backend to EC2
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "dotnet-6-mysql-crud-application/**"
+      - ".github/workflows/backend.yml"
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy backend on EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/dotnet-mysql-reacrjs-crud-app
+            git pull origin main
+            cd dotnet-6-mysql-crud-application
+            dotnet restore
+            dotnet publish -c Release -o publish
+            pm2 restart dotnet-backend || pm2 start "dotnet /home/ubuntu/dotnet-mysql-reacrjs-crud-app/dotnet-6-mysql-crud-application/publish/WebApi.dll --urls http://0.0.0.0:9080" --name dotnet-backend
+            pm2 save
