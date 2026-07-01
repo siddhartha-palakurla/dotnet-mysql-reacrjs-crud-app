@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Install frontend dependencies
         working-directory: react-crud-app
@@ -37,4 +37,4 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Deploy build to S3
-        run: aws s3 sync react-js-crud-application/build s3://${{ secrets.S3_BUCKET_NAME }} --delete
+        run: aws s3 sync react-crud-app/build s3://${{ secrets.S3_BUCKET_NAME }} --delete
